@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <title ng-bind="title"></title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1">
+
+        <base href="/">
+
+        <!-- build:css vendor.css -->
+        <link rel="stylesheet" href="../../node_modules/angular-material/angular-material.min.css">
+        <!-- endbuild -->
+
+        <!--suppress HtmlUnknownTarget -->
+        <link rel="stylesheet" href="styles.min.css">
+    </head>
+
+    <body ng-cloak>
+        <div layout="column" layout-fill>
+            <header id="header">
+                <div ui-view="header"></div>
+            </header>
+
+            <md-content layout="column" flex>
+                <main layout="row" layout-padding flex>
+                    <div id="layout" flex ui-view="content"></div>
+                </main>
+
+                <footer id="footer">
+                    <div ui-view="footer"></div>
+                </footer>
+            </md-content>
+        </div>
+
+        <script src="bundle.js"></script>
+    </body>
+</html>
