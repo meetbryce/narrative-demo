@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "airbnb",
+    "angular"
+  ],
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "rules": {
+    "indent": ["error", 4, {"SwitchCase": 1}],
+    "strict": 0,
+    "no-use-before-define": ["error", { "functions": false, "classes": true }],
+    "space-before-function-paren": ["error", "always"],
+    "wrap-iife": ["error", "outside"]
+  }
+}
