@@ -32,5 +32,13 @@
     "lazypipe": "^1.0.1",
     "webpack": "beta"
   },
-  "dependencies": {}
+  "dependencies": {
+    "angular": "1.5",
+    "angular-animate": "1.5",
+    "angular-aria": "1.5",
+    "angular-material": "^1.1.1",
+    "angular-ui-router": "^1.0.0-rc.1",
+    "angularfire": "^2.2.0",
+    "firebase": "^3.6.6"
+  }
 }
