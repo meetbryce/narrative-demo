@@ -47,7 +47,7 @@
 
         activate();
 
-        ///////
+        // --------- //
 
         function activate () {
             $log.info('Running', $ctrl.state.title);
@@ -61,6 +61,8 @@
                     return 'phonelink_ring';
                 case 'ID Mapping':
                     return 'compare_arrows';
+                default:
+                    return 'edit';
             }
         }
     }
