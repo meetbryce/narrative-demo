@@ -36,6 +36,10 @@
 
         // --------- //
 
+        /**
+         * Get all active Buy Orders as a promise
+         * @returns {Promise.<BuyOrder[]>} - promise that resolves with an array of Buy Orders
+         */
         function getAll () {
             return $q(resolve => resolve(buyOrders));
         }
