@@ -8,25 +8,19 @@
     buyOrderService.$inject = ['$q'];
 
     function buyOrderService ($q) {
+        class BuyOrder {
+            constructor (id, title, packageType, maxBid) {
+                this.id = id;
+                this.title = title;
+                this.packageType = packageType;
+                this.maxBid = maxBid;
+            }
+        }
+
         let buyOrders = [
-            {
-                id: 1,
-                title: 'Where do people play mobile games?',
-                packageType: 'Device Location',
-                maxBid: 3000,
-            },
-            {
-                id: 2,
-                title: 'Monthly usage patterns for iOS email apps',
-                packageType: 'Device Behavior',
-                maxBid: 2300,
-            },
-            {
-                id: 3,
-                title: 'Cross-Device tracking of our registered users',
-                packageType: 'ID Mapping',
-                maxBid: 5800,
-            },
+            new BuyOrder(1, 'Where do people play mobile games?', 'Device Location', 3000),
+            new BuyOrder(2, 'Monthly usage patterns for iOS email apps', 'Device Behavior', 2300),
+            new BuyOrder(3, 'Cross-Device tracking of our registered users', 'ID Mapping', 5800),
         ];
         // noinspection UnnecessaryLocalVariableJS
         const service = {
