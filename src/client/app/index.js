@@ -7,6 +7,10 @@ import 'angularfire';
 
 import './app.module';
 
+import './_services/services.module';
+import './_services/buyOrder.service';
+import './_services/modal.service';
+
 import './blocks/router/router.module';
 import './blocks/router/router-helper.provider';
 

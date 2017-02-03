@@ -14,5 +14,6 @@
             'app.core',
             'app.dashboard',
             'app.layout',
+            'app.services',
         ]);
 }());
