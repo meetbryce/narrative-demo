@@ -1,4 +1,3 @@
-window.firebase = require('firebase');
 
 import 'angular';
 import 'angular-material';
@@ -21,8 +20,11 @@ import './core/core.route';
 import './dashboard/dashboard.module';
 import './dashboard/dashboard.route';
 import './dashboard/dashboard.component';
+import './dashboard/components/buyOrderModal.controller';
 
 import './layout/layout.module';
 import './layout/layout.route';
 import './layout/components/header.component';
 import './layout/components/footer.component';
+
+window.firebase = require('firebase');

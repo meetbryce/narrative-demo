@@ -1,4 +1,4 @@
-<h1>Dashboard</h1>
+<h1>Your Narrative Dashboard</h1>
 
 <section layout="row" layout-align="center top">
     <!-- todo: convert to buy-list component -->
@@ -6,7 +6,7 @@
         <md-card-title>
             <md-card-title-text layout="row" layout-align="space-between center">
                 <span class="md-headline">Open Buy Orders</span>
-                <md-button class="md-accent md-hue-3" ng-click="$ctrl.openBuyOrderModal()">New Buy Order</md-button>
+                <md-button class="md-accent md-hue-3" ng-click="$ctrl.openBuyOrderModal($event)">New Buy Order</md-button>
             </md-card-title-text>
         </md-card-title>
         <md-card-content>

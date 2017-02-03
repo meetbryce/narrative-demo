@@ -1,1 +1,56 @@
-<p>buy order modal</p>
+<md-dialog class="md-dialog-medium">
+    <div ng-if="$ctrl.state.loading">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 ng-bind="$ctrl.state.title"></h2>
+                <div flex></div>
+                <md-button class="md-icon-button" ng-click="$ctrl.cancel()">
+                    <md-icon aria-label="Close dialog">close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <div class="mbxl mtl pbm" layout="row" layout-align="space-around">
+            <md-progress-circular class="md-accent md-hue-3" md-diameter="25" md-mode="indeterminate"></md-progress-circular>
+        </div>
+    </div>
+
+    <form ng-if="!$ctrl.state.loading" ng-submit="$ctrl.finish()"><!-- nb: this needs to be a form for the built in formatting to work -->
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 ng-bind="$ctrl.state.title"></h2>
+                <div flex></div>
+                <md-button class="md-icon-button" ng-click="$ctrl.cancel()">
+                    <md-icon aria-label="Close dialog">close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content layout="column">
+            <p>Enter the specification of your buy order below and we'll get to work finding the data you need.</p>
+            <md-input-container>
+                <label for="title">Title</label>
+                <input id="title" ng-model="$ctrl.buyOrder.title" ng-model-options="{debounce: 300}" md-auto-focus flex required>
+                <div class="hint">Provide a short description of what you're looking for.</div>
+            </md-input-container>
+            <md-input-container>
+                <label for="maxBid">Maximum Bid Price</label>
+                <input id="maxBid" type="number" ng-model="$ctrl.buyOrder.maxBid" ng-model-options="{debounce: 300}" flex required>
+                <div class="hint">Using your maximum bid, our algorithms will get you the best price we can.</div>
+            </md-input-container>
+            <md-input-container class="md-select-container" flex>
+                <label>Package Type</label>
+                <md-select name="type" ng-model="$ctrl.buyOrder.packageType" required>
+                    <md-option value="Device Location">Device Location</md-option>
+                    <md-option value="Device Behavior">Device Behavior</md-option>
+                    <md-option value="ID Mapping">ID Mapping</md-option>
+                </md-select>
+                <div class="md-errors-spacer"></div>
+                <div class="hint">Select the type of data you're looking for from the categories we currently have available.</div>
+            </md-input-container>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button class="md-accent md-hue-3" type="submit">Place The Buy Order</md-button>
+            <span flex></span>
+            <md-button class="md-muted" ng-click="$ctrl.cancel()">Cancel</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
