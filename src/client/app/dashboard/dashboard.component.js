@@ -23,7 +23,7 @@
     function DashboardController ($log, buyOrderService, modalService) {
         const $ctrl = this;
         $ctrl.getOrderIcon = getOrderIcon;
-        $ctrl.openBuyOrderModal = modalService.create('app/dashboard/components/buyOrderModal.html');
+        $ctrl.openBuyOrderModal = modalService.create('app/dashboard/components/buyOrderModal.html', 'BuyOrderModalController');
         $ctrl.state = {};
         $ctrl.state.title = 'DashboardController';
 
