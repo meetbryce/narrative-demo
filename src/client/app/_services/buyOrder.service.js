@@ -16,8 +16,7 @@
                 this.maxBid = maxBid;
             }
         }
-
-        let buyOrders = [
+        const buyOrders = [
             new BuyOrder(1, 'Where do people play mobile games?', 'Device Location', 3000),
             new BuyOrder(2, 'Monthly usage patterns for iOS email apps', 'Device Behavior', 2300),
             new BuyOrder(3, 'Cross-Device tracking of our registered users', 'ID Mapping', 5800),
