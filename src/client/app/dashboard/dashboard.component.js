@@ -17,11 +17,13 @@
     DashboardController.$inject = [
         '$log',
         'buyOrderService',
+        'modalService',
     ];
 
-    function DashboardController ($log, buyOrderService) {
+    function DashboardController ($log, buyOrderService, modalService) {
         const $ctrl = this;
         $ctrl.getOrderIcon = getOrderIcon;
+        $ctrl.openBuyOrderModal = () => $log.info('will open modal now');
         $ctrl.state = {};
         $ctrl.state.title = 'DashboardController';
 
@@ -36,6 +38,11 @@
                 .then((buyOrders) => { $ctrl.buyOrders = buyOrders; });
         }
 
+        /**
+         * Used to determine the md-icon to display based on the package type
+         * @param packageType {string} - Any of (Device Location, Device Behaviour, ID Mapping)
+         * @returns {string} - ligature string for md-icon
+         */
         function getOrderIcon (packageType) {
             switch (packageType) {
                 case 'Device Location':
