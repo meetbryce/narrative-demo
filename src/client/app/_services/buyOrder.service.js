@@ -23,11 +23,22 @@
         ];
         // noinspection UnnecessaryLocalVariableJS
         const service = {
+            addNew,
             getAll,
         };
         return service;
 
         // --------- //
+
+        function addNew (buyOrderData) {
+            return $q(resolve => {
+                const {title, packageType, maxBid} = buyOrderData;
+                const newId = buyOrders.length;
+                const newBuyOrder = new BuyOrder(newId, title, packageType, maxBid);
+                buyOrders.push(newBuyOrder);
+                resolve(newId);
+            })
+        }
 
         /**
          * Get all active Buy Orders as a promise

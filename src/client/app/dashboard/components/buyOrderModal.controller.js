@@ -10,12 +10,14 @@
         '$mdDialog',
         '$timeout',
         'data',
+        'buyOrderService',
     ];
 
     /* @ngInject */
-    function BuyOrderModalController ($log, $mdDialog, $timeout, data) {
+    function BuyOrderModalController ($log, $mdDialog, $timeout, data, buyOrderService) {
         const $ctrl = this;
         $ctrl.cancel = () => $mdDialog.cancel();
+        $ctrl.finish = finish;
         $ctrl.state = {};
 
         activate();
@@ -35,6 +37,11 @@
                 $ctrl.state.buttonLabel = 'Place The Buy Order';
             }
             $timeout(() => { $ctrl.state.loading = false; }, 450);
+        }
+
+        function finish (buyOrderData) {
+            buyOrderService.addNew(buyOrderData)
+                .then(newBuyOrderId => $mdDialog.hide(newBuyOrderId));
         }
     }
 }());

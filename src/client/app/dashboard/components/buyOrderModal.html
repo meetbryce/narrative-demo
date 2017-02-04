@@ -14,7 +14,7 @@
         </div>
     </div>
 
-    <form ng-if="!$ctrl.state.loading" ng-submit="$ctrl.finish()"><!-- nb: this needs to be a form for the built in formatting to work -->
+    <form ng-if="!$ctrl.state.loading" ng-submit="$ctrl.finish($ctrl.buyOrder)"><!-- nb: this needs to be a form for the built in formatting to work -->
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2 ng-bind="$ctrl.state.title"></h2>
