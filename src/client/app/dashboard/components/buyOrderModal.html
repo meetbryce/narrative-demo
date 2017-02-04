@@ -48,7 +48,7 @@
             </md-input-container>
         </md-dialog-content>
         <md-dialog-actions layout="row">
-            <md-button class="md-accent md-hue-3" type="submit">Place The Buy Order</md-button>
+            <md-button class="md-accent md-hue-3" type="submit" ng-bind="$ctrl.state.buttonLabel"></md-button>
             <span flex></span>
             <md-button class="md-muted" ng-click="$ctrl.cancel()">Cancel</md-button>
         </md-dialog-actions>

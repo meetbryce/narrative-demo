@@ -17,7 +17,7 @@
                     <h4>Package Type: {{order.packageType}}</h4>
                     <p>Max Bid-Price: ${{order.maxBid}}</p>
                 </div>
-                <md-button class="md-secondary md-icon-button" ng-click="null" aria-label="Edit Buy Order">
+                <md-button class="md-secondary md-icon-button" ng-click="$ctrl.openBuyOrderModal($event, order)" aria-label="Edit Buy Order">
                     <md-tooltip>Edit this order</md-tooltip>
                     <md-icon>edit</md-icon>
                 </md-button>
