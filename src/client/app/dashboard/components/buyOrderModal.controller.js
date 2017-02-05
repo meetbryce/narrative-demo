@@ -28,7 +28,7 @@
             $log.info('Running', $ctrl.state.title);
             $ctrl.state.loading = true;
             if (data) {
-                $ctrl.buyOrder = data;
+                $ctrl.buyOrder = angular.copy(data);
                 $ctrl.state.title = 'Editing Buy Order';
                 $ctrl.state.buttonLabel = 'Save Changes';
             } else {
@@ -40,8 +40,13 @@
         }
 
         function finish (buyOrderData) {
-            buyOrderService.addNew(buyOrderData)
-                .then(newBuyOrderId => $mdDialog.hide(newBuyOrderId));
+            if (data) {
+                buyOrderService.updateById(data.id, buyOrderData)
+                    .then(buyOrderId => $mdDialog.hide(buyOrderId));
+            } else {
+                buyOrderService.addNew(buyOrderData)
+                    .then(newBuyOrderId => $mdDialog.hide(newBuyOrderId));
+            }
         }
     }
 }());

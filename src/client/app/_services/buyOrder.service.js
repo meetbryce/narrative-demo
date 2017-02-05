@@ -25,6 +25,7 @@
         const service = {
             addNew,
             getAll,
+            updateById,
         };
         return service;
 
@@ -51,6 +52,20 @@
          */
         function getAll () {
             return $q(resolve => resolve(buyOrders));
+        }
+
+        /**
+         * Update an existing Buy Order
+         * @param id {number}
+         * @param buyOrderData {object}
+         * @returns {Promise.<number>} - promise that resolves with the id of Buy Order
+         */
+        function updateById (id, buyOrderData) {
+            return $q((resolve) => {
+                const { title, packageType, maxBid } = buyOrderData;
+                buyOrders[id] = new BuyOrder(id, title, packageType, maxBid);
+                resolve(id);
+            });
         }
     }
 }());
