@@ -30,14 +30,19 @@
 
         // --------- //
 
+        /**
+         * Add a new Buy Order
+         * @param buyOrderData {object}
+         * @returns {Promise.<number>} - promise that resolves with the id of new Buy Order
+         */
         function addNew (buyOrderData) {
-            return $q(resolve => {
-                const {title, packageType, maxBid} = buyOrderData;
+            return $q((resolve) => {
+                const { title, packageType, maxBid } = buyOrderData;
                 const newId = buyOrders.length;
                 const newBuyOrder = new BuyOrder(newId, title, packageType, maxBid);
                 buyOrders.push(newBuyOrder);
                 resolve(newId);
-            })
+            });
         }
 
         /**
