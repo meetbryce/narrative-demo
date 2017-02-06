@@ -10,7 +10,7 @@
     function buyOrderService ($q) {
         class BuyOrder {
             constructor (title, packageType, maxBid, id = undefined) {
-                this.id = id || getNextId();
+                this.id = id || getNextId(); // if an id isn't provided, generate one
                 this.title = title;
                 this.packageType = packageType;
                 this.maxBid = maxBid;
