@@ -23,7 +23,7 @@
          * @param templatePath - path to the template that should be rendered
          * @param controller - (optional) name of angular controller, will use simple controller (expose `$ctrl`) if blank
          * @returns {open} - closure - opens a modal based on the arguments provided when instantiated
-         * @example vm.openModal = modalService.create('app/module/components/SomeModal.html','SomeModalController');
+         * @example $ctrl.openModal = modalService.create('app/module/components/SomeModal.html','SomeModalController');
          */
         function create (templatePath, controller) {
             return function open (e, data) {
