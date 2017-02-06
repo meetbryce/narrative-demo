@@ -26,6 +26,7 @@
         const service = {
             addNew,
             getAll,
+            removeById,
             updateById,
         };
         return service;
@@ -61,6 +62,15 @@
         function getNextId () {
             nextId += 1;
             return nextId;
+        }
+
+        function removeById (id) {
+            return $q((resolve, reject) => {
+                const theIndex = buyOrders.findIndex(buyOrder => buyOrder.id === id);
+                if (theIndex === -1) reject(`Buy Order with ID ${id} not found`);
+                buyOrders.splice(theIndex, 1);
+                resolve('deleted');
+            });
         }
 
         /**
