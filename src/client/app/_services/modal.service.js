@@ -67,15 +67,19 @@
         }
 
         function createConfirm (title, message, doWhenConfirmed) {
-            // todo: implement loading state to prevent chrome font-weight bug
             const template = `<md-dialog class="md-dialog-medium" role="dialog" tabindex="-1">
-                    <md-dialog-content class="md-dialog-content" tabindex="-1">
+                    <md-dialog-content class="md-dialog-content" ng-if="$ctrl.state.loading" tabindex="-1" aria-label="Loading modal...">
+                        <div layout="row" layout-align="space-around">
+                            <md-progress-circular class="md-accent md-hue-3" md-diameter="25" md-mode="indeterminate"></md-progress-circular>
+                        </div>
+                    </md-dialog-content>
+                    <md-dialog-content class="md-dialog-content" ng-if="!$ctrl.state.loading" tabindex="-1" aria-label="${title}">
                         <h2 class="md-title ng-binding">${title}</h2>
                         <div class="md-dialog-content-body">
                             <p class="ng-binding">${message}</p>
                         </div>
                     </md-dialog-content>
-                    <md-dialog-actions>
+                    <md-dialog-actions ng-if="!$ctrl.state.loading">
                         <button class="md-default md-cancel-button md-button" type="button" ng-click="$ctrl.cancel()">Cancel</button>
                         <button class="md-warn md-confirm-button md-button" type="button" ng-click="$ctrl.confirm()" md-autofocus>Yes, I'm sure.</button>
                     </md-dialog-actions>
@@ -116,6 +120,7 @@
                     function activate () {
                         $timeout(() => { $ctrl.state.loading = false; }, 450);
                     }
+
                     function confirm () {
                         doWhenConfirmed(data);
                         $mdDialog.hide('action confirmed');
