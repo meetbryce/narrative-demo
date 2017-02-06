@@ -41,7 +41,7 @@
 
         /**
          * Used to determine the md-icon to display based on the package type
-         * @param packageType {string} - Any of (Device Location, Device Behaviour, ID Mapping)
+         * @param packageType {string} - Any of (Device Location, Device Behavior, ID Mapping)
          * @returns {string} - ligature string for md-icon
          */
         function getOrderIcon (packageType) {
