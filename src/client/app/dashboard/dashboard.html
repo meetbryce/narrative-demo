@@ -22,7 +22,7 @@
                     <md-tooltip>Edit this order</md-tooltip>
                     <md-icon>edit</md-icon>
                 </md-button>
-                <md-button class="md-secondary md-icon-button" ng-click="$ctrl.remove(order.id)" aria-label="Edit Buy Order">
+                <md-button class="md-secondary md-icon-button" ng-click="$ctrl.remove($event, order.id)" aria-label="Permanently Delete Buy Order">
                     <md-tooltip>Delete this order permanently</md-tooltip>
                     <md-icon>delete</md-icon>
                 </md-button>

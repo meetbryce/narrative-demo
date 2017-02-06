@@ -14,6 +14,7 @@
         // noinspection UnnecessaryLocalVariableJS
         const service = {
             create,
+            createConfirm,
         };
         return service;
 
@@ -60,6 +61,64 @@
 
                     function activate () {
                         $timeout(() => { $ctrl.state.loading = false; }, 450);
+                    }
+                }
+            };
+        }
+
+        function createConfirm (title, message, doWhenConfirmed) {
+            // todo: implement loading state to prevent chrome font-weight bug
+            const template = `<md-dialog class="md-dialog-medium" role="dialog" tabindex="-1">
+                    <md-dialog-content class="md-dialog-content" tabindex="-1">
+                        <h2 class="md-title ng-binding">${title}</h2>
+                        <div class="md-dialog-content-body">
+                            <p class="ng-binding">${message}</p>
+                        </div>
+                    </md-dialog-content>
+                    <md-dialog-actions>
+                        <button class="md-default md-cancel-button md-button" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                        <button class="md-warn md-confirm-button md-button" type="button" ng-click="$ctrl.confirm()" md-autofocus>Yes, I'm sure.</button>
+                    </md-dialog-actions>
+                </md-dialog>`;
+
+            return function open (e, data) {
+                $mdDialog.show({
+                    clickOutsideToClose: true,
+                    controller: ConfirmDialogController,
+                    controllerAs: '$ctrl',
+                    escapeToClose: true,
+                    targetEvent: e,
+                    template,
+                    locals: {
+                        data,
+                    },
+                });
+
+                ConfirmDialogController.$inject = [
+                    '$log',
+                    '$mdDialog',
+                    '$timeout',
+                    'data',
+                ];
+
+                // eslint-disable-next-line no-shadow
+                function ConfirmDialogController ($log, $mdDialog, $timeout, data) {
+                    const $ctrl = this;
+                    $ctrl.cancel = () => $mdDialog.cancel();
+                    $ctrl.confirm = confirm;
+                    $ctrl.state = {};
+                    $ctrl.state.loading = true;
+
+                    activate();
+
+                    // --------- //
+
+                    function activate () {
+                        $timeout(() => { $ctrl.state.loading = false; }, 450);
+                    }
+                    function confirm () {
+                        doWhenConfirmed(data);
+                        $mdDialog.hide('action confirmed');
                     }
                 }
             };

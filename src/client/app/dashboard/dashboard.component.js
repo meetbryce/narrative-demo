@@ -24,7 +24,7 @@
         const $ctrl = this;
         $ctrl.getOrderIcon = getOrderIcon;
         $ctrl.openBuyOrderModal = modalService.create('app/dashboard/components/buyOrderModal.html', 'BuyOrderModalController');
-        $ctrl.remove = buyOrderService.removeById; // todo: use confirmation modal
+        $ctrl.remove = modalService.createConfirm('Are You Sure?', 'Once deleted, your buy order will be gone forever. Proceed with caution.', buyOrderService.removeById);
         $ctrl.state = {};
         $ctrl.state.title = 'DashboardController';
 
