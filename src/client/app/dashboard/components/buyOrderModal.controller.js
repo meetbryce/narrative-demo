@@ -25,7 +25,6 @@
         // --------- //
 
         function activate () {
-            $log.info('Running', $ctrl.state.title);
             $ctrl.state.loading = true;
             if (data) {
                 $ctrl.buyOrder = angular.copy(data);
@@ -36,6 +35,7 @@
                 $ctrl.state.title = 'Place A New Buy Order';
                 $ctrl.state.buttonLabel = 'Place The Buy Order';
             }
+            $log.info('Running', $ctrl.state.title);
             $timeout(() => { $ctrl.state.loading = false; }, 450);
         }
 
