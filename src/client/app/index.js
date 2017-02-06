@@ -3,6 +3,7 @@ import 'angular';
 import 'angular-material';
 import 'angular-ui-router';
 import 'angularfire';
+import 'ngstorage';
 
 import './app.module';
 

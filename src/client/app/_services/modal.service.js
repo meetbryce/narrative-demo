@@ -27,6 +27,7 @@
          * @example $ctrl.openModal = modalService.create('app/module/components/SomeModal.html','SomeModalController');
          */
         function create (templatePath, controller) {
+            // todo: add docs
             return function open (e, data) {
                 $mdDialog.show({
                     clickOutsideToClose: true,
@@ -66,6 +67,7 @@
             };
         }
 
+        // todo: add docs
         function createConfirm (title, message, doWhenConfirmed) {
             const template = `<md-dialog class="md-dialog-medium" role="dialog" tabindex="-1">
                     <md-dialog-content class="md-dialog-content" ng-if="$ctrl.state.loading" tabindex="-1" aria-label="Loading modal...">
@@ -85,6 +87,7 @@
                     </md-dialog-actions>
                 </md-dialog>`;
 
+            // todo: add docs
             return function open (e, data) {
                 $mdDialog.show({
                     clickOutsideToClose: true,

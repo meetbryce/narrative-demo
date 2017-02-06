@@ -5,9 +5,13 @@
         .module('app.services')
         .factory('buyOrderService', buyOrderService);
 
-    buyOrderService.$inject = ['$q'];
+    buyOrderService.$inject = [
+        '$localStorage',
+        '$log',
+        '$q',
+    ];
 
-    function buyOrderService ($q) {
+    function buyOrderService ($localStorage, $log, $q) {
         class BuyOrder {
             constructor (title, packageType, maxBid, id = undefined) {
                 this.id = id || getNextId(); // if an id isn't provided, generate one
@@ -16,12 +20,7 @@
                 this.maxBid = maxBid;
             }
         }
-        let nextId = -1; // so we can use getNextId() and get 0 the first time
-        const buyOrders = [
-            new BuyOrder('Where do people play mobile games?', 'Device Location', 3000),
-            new BuyOrder('Monthly usage patterns for iOS email apps', 'Device Behavior', 2300),
-            new BuyOrder('Cross-Device tracking of our registered users', 'ID Mapping', 5800),
-        ];
+        activate();
         // noinspection UnnecessaryLocalVariableJS
         const service = {
             addNew,
@@ -33,16 +32,32 @@
 
         // --------- //
 
+        function activate () {
+            if (angular.isUndefined($localStorage.nextId)) {
+                // eslint-disable-next-line no-param-reassign
+                $localStorage.nextId = -1; // so we can use getNextId() & get 0 the first time
+            }
+            if (angular.isUndefined($localStorage.buyOrders)) {
+                // eslint-disable-next-line no-param-reassign
+                $localStorage.buyOrders = [
+                    new BuyOrder('Where do people play mobile games?', 'Device Location', 3000),
+                    new BuyOrder('Monthly usage patterns for iOS email apps', 'Device Behavior', 2300),
+                    new BuyOrder('Cross-Device tracking of our registered users', 'ID Mapping', 5800),
+                ];
+            }
+        }
+
         /**
          * Add a new Buy Order
          * @param buyOrderData {object}
          * @returns {Promise.<number>} - promise that resolves with the id of new Buy Order
          */
+        // todo: add toast?
         function addNew (buyOrderData) {
             return $q((resolve) => {
                 const { title, packageType, maxBid } = buyOrderData;
                 const newBuyOrder = new BuyOrder(title, packageType, maxBid);
-                buyOrders.push(newBuyOrder);
+                $localStorage.buyOrders.push(newBuyOrder);
                 resolve(newBuyOrder.id);
             });
         }
@@ -52,7 +67,7 @@
          * @returns {Promise.<BuyOrder[]>} - promise that resolves with an array of Buy Orders
          */
         function getAll () {
-            return $q(resolve => resolve(buyOrders));
+            return $q(resolve => resolve($localStorage.buyOrders));
         }
 
         /**
@@ -60,15 +75,18 @@
          * @returns {number} - the next ID to be used
          */
         function getNextId () {
-            nextId += 1;
-            return nextId;
+            // eslint-disable-next-line no-param-reassign
+            $localStorage.nextId += 1;
+            return $localStorage.nextId;
         }
 
+        // todo: add docs
+        // todo: add toast?
         function removeById (id) {
             return $q((resolve, reject) => {
-                const theIndex = buyOrders.findIndex(buyOrder => buyOrder.id === id);
+                const theIndex = $localStorage.buyOrders.findIndex(buyOrder => buyOrder.id === id);
                 if (theIndex === -1) reject(`Buy Order with ID ${id} not found`);
-                buyOrders.splice(theIndex, 1);
+                $localStorage.buyOrders.splice(theIndex, 1);
                 resolve('deleted');
             });
         }
@@ -79,13 +97,15 @@
          * @param buyOrderData {object}
          * @returns {Promise.<number>} - promise that resolves with the id of Buy Order
          */
+        // todo: add toast?
         function updateById (id, buyOrderData) {
             return $q((resolve, reject) => {
                 const { title, packageType, maxBid } = buyOrderData;
-                const theIndex = buyOrders.findIndex(buyOrder => buyOrder.id === id);
+                const theIndex = $localStorage.buyOrders.findIndex(buyOrder => buyOrder.id === id);
 
                 if (theIndex === -1) reject(`Buy Order with ID ${id} not found`);
-                buyOrders[theIndex] = new BuyOrder(title, packageType, maxBid, id);
+                // eslint-disable-next-line no-param-reassign
+                $localStorage.buyOrders[theIndex] = new BuyOrder(title, packageType, maxBid, id);
                 resolve(id);
             });
         }

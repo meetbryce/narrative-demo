@@ -39,6 +39,7 @@
             $timeout(() => { $ctrl.state.loading = false; }, 450);
         }
 
+        // todo: add docs
         function finish (buyOrderData) {
             if (data) {
                 buyOrderService.updateById(data.id, buyOrderData)
