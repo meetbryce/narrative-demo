@@ -80,9 +80,12 @@
          * @returns {Promise.<number>} - promise that resolves with the id of Buy Order
          */
         function updateById (id, buyOrderData) {
-            return $q((resolve) => {
+            return $q((resolve, reject) => {
                 const { title, packageType, maxBid } = buyOrderData;
-                buyOrders[id] = new BuyOrder(title, packageType, maxBid, id);
+                const theIndex = buyOrders.findIndex(buyOrder => buyOrder.id === id);
+
+                if (theIndex === -1) reject(`Buy Order with ID ${id} not found`);
+                buyOrders[theIndex] = new BuyOrder(title, packageType, maxBid, id);
                 resolve(id);
             });
         }
