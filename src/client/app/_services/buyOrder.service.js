@@ -9,17 +9,18 @@
 
     function buyOrderService ($q) {
         class BuyOrder {
-            constructor (id, title, packageType, maxBid) {
-                this.id = id;
+            constructor (title, packageType, maxBid, id = undefined) {
+                this.id = id || getNextId();
                 this.title = title;
                 this.packageType = packageType;
                 this.maxBid = maxBid;
             }
         }
+        let nextId = -1; // so we can use getNextId() and get 0 the first time
         const buyOrders = [
-            new BuyOrder(0, 'Where do people play mobile games?', 'Device Location', 3000),
-            new BuyOrder(1, 'Monthly usage patterns for iOS email apps', 'Device Behavior', 2300),
-            new BuyOrder(2, 'Cross-Device tracking of our registered users', 'ID Mapping', 5800),
+            new BuyOrder('Where do people play mobile games?', 'Device Location', 3000),
+            new BuyOrder('Monthly usage patterns for iOS email apps', 'Device Behavior', 2300),
+            new BuyOrder('Cross-Device tracking of our registered users', 'ID Mapping', 5800),
         ];
         // noinspection UnnecessaryLocalVariableJS
         const service = {
@@ -39,10 +40,9 @@
         function addNew (buyOrderData) {
             return $q((resolve) => {
                 const { title, packageType, maxBid } = buyOrderData;
-                const newId = buyOrders.length;
-                const newBuyOrder = new BuyOrder(newId, title, packageType, maxBid);
+                const newBuyOrder = new BuyOrder(title, packageType, maxBid);
                 buyOrders.push(newBuyOrder);
-                resolve(newId);
+                resolve(newBuyOrder.id);
             });
         }
 
@@ -55,6 +55,15 @@
         }
 
         /**
+         * Increment the pseudo static Next ID variable
+         * @returns {number} - the next ID to be used
+         */
+        function getNextId () {
+            nextId += 1;
+            return nextId;
+        }
+
+        /**
          * Update an existing Buy Order
          * @param id {number}
          * @param buyOrderData {object}
@@ -63,7 +72,7 @@
         function updateById (id, buyOrderData) {
             return $q((resolve) => {
                 const { title, packageType, maxBid } = buyOrderData;
-                buyOrders[id] = new BuyOrder(id, title, packageType, maxBid);
+                buyOrders[id] = new BuyOrder(title, packageType, maxBid, id);
                 resolve(id);
             });
         }
