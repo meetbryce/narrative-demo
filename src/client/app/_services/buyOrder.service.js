@@ -13,6 +13,13 @@
 
     function buyOrderService ($localStorage, $log, $q) {
         class BuyOrder {
+            /**
+             * BuyOrder constructor
+             * @param title {string} - Used to describe the Buy Order
+             * @param packageType {string} - Any of (Device Location, Device Behavior, ID Mapping)
+             * @param maxBid {number} - Maximum bid accepted in whole USD
+             * @param [id] {number} - Unique identifier of this BuyOrder, passed if editing & generated if creating
+             */
             constructor (title, packageType, maxBid, id = undefined) {
                 this.id = id || getNextId(); // if an id isn't provided, generate one
                 this.title = title;
@@ -80,7 +87,11 @@
             return $localStorage.nextId;
         }
 
-        // todo: add docs
+        /**
+         * Remove an existing Buy Order
+         * @param id {number} the unique ID of the Buy Order to be removed
+         * @returns {Promise.<string>} - promise that resolves with 'deleted'
+         */
         // todo: add toast?
         function removeById (id) {
             return $q((resolve, reject) => {

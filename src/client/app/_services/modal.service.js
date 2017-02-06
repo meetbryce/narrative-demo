@@ -21,13 +21,19 @@
         // --------- //
 
         /**
-         * @param templatePath - path to the template that should be rendered
-         * @param controller - (optional) name of angular controller, will use simple controller (expose `$ctrl`) if blank
+         * Create a modal with a custom template and optionally a custom controller
+         * @param templatePath {string} - path to the template that should be rendered
+         * @param [controller] {string} - (optional) name of angular controller, will use simple controller (expose `$ctrl`) if blank
          * @returns {open} - closure - opens a modal based on the arguments provided when instantiated
          * @example $ctrl.openModal = modalService.create('app/module/components/SomeModal.html','SomeModalController');
          */
         function create (templatePath, controller) {
-            // todo: add docs
+            /**
+             * Open the created modal
+             * @param e {MouseEvent} - click event from ng-click (for animation start point)
+             * @param [data] {*} - optional data to be made available at $ctrl.data
+             * @example ng-click="$ctrl.openModal($event, data)"
+             */
             return function open (e, data) {
                 $mdDialog.show({
                     clickOutsideToClose: true,
@@ -67,7 +73,13 @@
             };
         }
 
-        // todo: add docs
+        /**
+         * Create a confirmation dialog
+         * @param title {string} - the title rendered in the modal
+         * @param message {string} - the plaintext body rendered in the modal
+         * @param doWhenConfirmed {function} - executed when user confirms, passed 'data' {*} as param (which is passed to {open})
+         * @returns {open}  - closure that opens a confirmation modal based on the params provided when instantiated
+         */
         function createConfirm (title, message, doWhenConfirmed) {
             const template = `<md-dialog class="md-dialog-medium" role="dialog" tabindex="-1">
                     <md-dialog-content class="md-dialog-content" ng-if="$ctrl.state.loading" tabindex="-1" aria-label="Loading modal...">
@@ -87,7 +99,12 @@
                     </md-dialog-actions>
                 </md-dialog>`;
 
-            // todo: add docs
+            /**
+             * Open the created modal
+             * @param e {MouseEvent} - click event from ng-click (for animation start point)
+             * @param [data] {*} - optional data to be made available at $ctrl.data
+             * @example ng-click="$ctrl.openModal($event, data)"
+             */
             return function open (e, data) {
                 $mdDialog.show({
                     clickOutsideToClose: true,

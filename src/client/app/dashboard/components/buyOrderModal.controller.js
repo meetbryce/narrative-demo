@@ -39,7 +39,15 @@
             $timeout(() => { $ctrl.state.loading = false; }, 450);
         }
 
-        // todo: add docs
+        /**
+         * Updates or adds a new Buy Order based on intention
+         * (set by whether data was passed when opening)
+         * and closes the modal when completed
+         * @param buyOrderData {object} - the data to be used to create the BuyOrder to be updated/added
+         * @param buyOrderData.title {string} - Used to describe the Buy Order
+         * @param buyOrderData.packageType {string} - Any of (Device Location, Device Behavior, ID Mapping)
+         * @param buyOrderData.maxBid {number} - Maximum bid accepted in whole USD
+         */
         function finish (buyOrderData) {
             if (data) {
                 buyOrderService.updateById(data.id, buyOrderData)
