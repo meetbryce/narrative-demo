@@ -8,10 +8,11 @@
     buyOrderService.$inject = [
         '$localStorage',
         '$log',
+        '$mdToast',
         '$q',
     ];
 
-    function buyOrderService ($localStorage, $log, $q) {
+    function buyOrderService ($localStorage, $log, $mdToast, $q) {
         class BuyOrder {
             /**
              * BuyOrder constructor
@@ -52,12 +53,12 @@
          * @param buyOrderData {object}
          * @returns {Promise.<number>} - promise that resolves with the id of new Buy Order
          */
-        // todo: add toast?
         function addNew (buyOrderData) {
             return $q((resolve) => {
                 const { title, packageType, maxBid } = buyOrderData;
                 const newBuyOrder = new BuyOrder(title, packageType, maxBid);
                 $localStorage.buyOrders.push(newBuyOrder);
+                $mdToast.showSimple('Buy order added');
                 resolve(newBuyOrder.id);
             });
         }
@@ -91,6 +92,7 @@
                     new BuyOrder('Monthly usage patterns for iOS email apps (sample)', 'Device Behavior', 2300),
                     new BuyOrder('Cross-Device tracking of our registered users (sample)', 'ID Mapping', 5800),
                 ];
+                $mdToast.showSimple('Sample buy orders loaded');
                 resolve('loaded');
             });
         }
@@ -100,12 +102,12 @@
          * @param id {number} the unique ID of the Buy Order to be removed
          * @returns {Promise.<string>} - promise that resolves with 'deleted'
          */
-        // todo: add toast?
         function removeById (id) {
             return $q((resolve, reject) => {
                 const theIndex = $localStorage.buyOrders.findIndex(buyOrder => buyOrder.id === id);
                 if (theIndex === -1) reject(`Buy Order with ID ${id} not found`);
                 $localStorage.buyOrders.splice(theIndex, 1);
+                $mdToast.showSimple('Buy order deleted');
                 resolve('deleted');
             });
         }
@@ -116,7 +118,6 @@
          * @param buyOrderData {object}
          * @returns {Promise.<number>} - promise that resolves with the id of Buy Order
          */
-        // todo: add toast?
         function updateById (id, buyOrderData) {
             return $q((resolve, reject) => {
                 const { title, packageType, maxBid } = buyOrderData;
@@ -125,6 +126,7 @@
                 if (theIndex === -1) reject(`Buy Order with ID ${id} not found`);
                 // eslint-disable-next-line no-param-reassign
                 $localStorage.buyOrders[theIndex] = new BuyOrder(title, packageType, maxBid, id);
+                $mdToast.showSimple('Buy order updated');
                 resolve(id);
             });
         }
