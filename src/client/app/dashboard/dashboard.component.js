@@ -16,15 +16,17 @@
 
     DashboardController.$inject = [
         '$log',
+        '$state',
         'buyOrderService',
         'modalService',
     ];
 
-    function DashboardController ($log, buyOrderService, modalService) {
+    function DashboardController ($log, $state, buyOrderService, modalService) {
         const $ctrl = this;
         $ctrl.getOrderIcon = getOrderIcon;
         $ctrl.openBuyOrderModal = modalService.create('app/dashboard/components/buyOrderModal.html', 'BuyOrderModalController');
         $ctrl.remove = modalService.createConfirm('Are You Sure?', 'Once deleted, your buy order will be gone forever. Proceed with caution.', buyOrderService.removeById);
+        $ctrl.loadSampleData = loadSampleData;
         $ctrl.state = {};
         $ctrl.state.title = 'DashboardController';
 
@@ -55,6 +57,14 @@
                 default:
                     return 'edit';
             }
+        }
+
+        /**
+         * Loads the sample data then reloads the state to update the view
+         */
+        function loadSampleData () {
+            buyOrderService.loadSampleData()
+                .then(() => { $state.reload(); })
         }
     }
 }());

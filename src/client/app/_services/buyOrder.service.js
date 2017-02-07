@@ -32,6 +32,7 @@
         const service = {
             addNew,
             getAll,
+            loadSampleData,
             removeById,
             updateById,
         };
@@ -43,14 +44,6 @@
             if (angular.isUndefined($localStorage.nextId)) {
                 // eslint-disable-next-line no-param-reassign
                 $localStorage.nextId = -1; // so we can use getNextId() & get 0 the first time
-            }
-            if (angular.isUndefined($localStorage.buyOrders)) {
-                // eslint-disable-next-line no-param-reassign
-                $localStorage.buyOrders = [
-                    new BuyOrder('Where do people play mobile games?', 'Device Location', 3000),
-                    new BuyOrder('Monthly usage patterns for iOS email apps', 'Device Behavior', 2300),
-                    new BuyOrder('Cross-Device tracking of our registered users', 'ID Mapping', 5800),
-                ];
             }
         }
 
@@ -85,6 +78,21 @@
             // eslint-disable-next-line no-param-reassign
             $localStorage.nextId += 1;
             return $localStorage.nextId;
+        }
+
+        /**
+         * Load a series of sample data to demo the use case
+         * @returns {Promise.<{string}>} - promise that resolves with 'loaded'
+         */
+        function loadSampleData () {
+            return $q((resolve, reject) => {
+                $localStorage.buyOrders = [
+                    new BuyOrder('Where do people play mobile games? (sample)', 'Device Location', 3000),
+                    new BuyOrder('Monthly usage patterns for iOS email apps (sample)', 'Device Behavior', 2300),
+                    new BuyOrder('Cross-Device tracking of our registered users (sample)', 'ID Mapping', 5800),
+                ];
+                resolve('loaded');
+            });
         }
 
         /**
