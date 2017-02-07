@@ -1,3 +1,8 @@
+md-list-item.md-3-line .md-list-item-text h3 {
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
 .buy-list--empty-state {
     h3 {
         color: #757575;
