@@ -9,7 +9,12 @@
         </md-card-title>
         <md-card-content>
             <!-- todo: add empty state -->
-            <md-list-item class="md-3-line" ng-repeat="order in $ctrl.buyOrders track by order.id">
+            <aside class="buy-list--empty-state" layout="column" layout-align="center center" ng-show="!$ctrl.buyOrders.length">
+                <h3>No open buy orders</h3>
+                <img src="images/empty-state-icon.png" alt="No Open Buy Orders image" width="180" height="180">
+                <p>Get started by creating a new buy order using the New Buy Order button above and our algorithm will get to work finding the data you need.</p>
+            </aside>
+            <md-list-item class="md-3-line" ng-show="$ctrl.buyOrders.length" ng-repeat="order in $ctrl.buyOrders track by order.id">
                 <md-icon class="md-avatar-icon md-accent md-hue-3">{{$ctrl.getOrderIcon(order.packageType)}}</md-icon>
                 <div class="md-list-item-text" layout="column">
                     <h3>{{order.title}}</h3>

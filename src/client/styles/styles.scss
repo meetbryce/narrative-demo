@@ -4,5 +4,6 @@
 
 main { min-height: calc(100% - 46px)} // where 46px is the height of the footer
 
+@import 'components/buyList';
 @import 'components/mdDialog';
 @import 'components/mdInput';
