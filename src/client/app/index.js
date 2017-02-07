@@ -22,6 +22,7 @@ import './dashboard/dashboard.module';
 import './dashboard/dashboard.route';
 import './dashboard/dashboard.component';
 import './dashboard/components/buyOrderModal.controller';
+import './dashboard/components/orderlist.component'
 
 import './layout/layout.module';
 import './layout/layout.route';
