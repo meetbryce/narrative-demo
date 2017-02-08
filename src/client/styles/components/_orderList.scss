@@ -14,3 +14,25 @@ md-list-item.md-3-line .md-list-item-text h3 {
         max-width: 360px;
     }
 }
+
+md-list md-list-item .md-avatar-icon {
+    background-color: transparent;
+}
+
+order-list {
+    .md-3-line .md-no-style {
+        max-width: 100%;
+        justify-content: flex-start;
+        align-items: center;
+        position: static;
+        padding: 0;
+        flex: 1;
+        md-icon {
+            margin-top: 0;
+        }
+        .md-list-item-text h3 {
+            text-overflow: ellipsis;
+            white-space: normal;
+        }
+    }
+}
