@@ -46,6 +46,10 @@
                 // eslint-disable-next-line no-param-reassign
                 $localStorage.nextId = -1; // so we can use getNextId() & get 0 the first time
             }
+            if (angular.isUndefined($localStorage.buyOrders)) {
+                // eslint-disable-next-line no-param-reassign
+                $localStorage.buyOrders = []; // so we can just .push straight away
+            }
         }
 
         /**
